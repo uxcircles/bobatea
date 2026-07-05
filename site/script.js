@@ -58,11 +58,19 @@
 
   const state = { base: "milkgreen", topping: "pearl", ice: "normal" };
 
-  const NAME = {
-    milkgreen: "奶綠", milktea: "奶茶", blacktea: "紅茶",
-    pearl: "Q彈珍珠", grass: "仙草凍",
-    normal: "正常冰", less: "少冰", light: "微冰",
+  const NAMES = {
+    zh: {
+      milkgreen: "奶綠", milktea: "奶茶", blacktea: "紅茶",
+      pearl: "Q彈珍珠", grass: "仙草凍",
+      normal: "正常冰", less: "少冰", light: "微冰",
+    },
+    en: {
+      milkgreen: "Milk Green Tea", milktea: "Milk Tea", blacktea: "Black Tea",
+      pearl: "Tapioca Pearls", grass: "Grass Jelly",
+      normal: "Regular Ice", less: "Less Ice", light: "Light Ice",
+    },
   };
+  const NAME = () => NAMES[window.__lang === "en" ? "en" : "zh"];
 
   // 每個「基底-配料」組合對應一張去背真照片
   const IMAGES = {
@@ -76,7 +84,8 @@
 
   let swapToken = 0;
   function render() {
-    summary.textContent = `${NAME[state.base]} · ${NAME[state.topping]} · ${NAME[state.ice]}`;
+    const n = NAME();
+    summary.textContent = `${n[state.base]} · ${n[state.topping]} · ${n[state.ice]}`;
 
     const src = IMAGES[`${state.base}-${state.topping}`];
     if (cup.getAttribute("src").endsWith(src)) return;
@@ -111,4 +120,87 @@
       render();
     });
   });
+
+  // 語言切換時，重繪摘要文字
+  document.addEventListener("langchange", render);
+})();
+
+// ===== 中 / 英 語言切換 =====
+(function i18n() {
+  const I18N = {
+    eb:    { zh: '清新茶香 <em>×</em> 濃郁奶香', en: 'FRESH TEA AROMA <em>×</em> RICH CREAMY MILK' },
+    title: { zh: '<span class="tz-line">極致</span><span class="tz-line">奶綠</span>',
+             en: '<span class="tz-line">Ultimate</span><span class="tz-line">Milk Green</span><span class="tz-line">Tea</span>' },
+    titleScript: { zh: 'Milk Green<br>Tea', en: 'Silky Smooth<br>Milk Green Tea' },
+    sub:   { zh: '茶香清新・奶香濃郁・口感滑順', en: 'Refreshing tea notes, rich milky flavour, and a silky-smooth finish' },
+    cta:   { zh: '立即品嚐 →', en: 'Order Now →' },
+    bTop:  { zh: '每日現泡', en: 'FRESHLY BREWED DAILY' },
+    bBot:  { zh: '安心好茶', en: 'QUALITY YOU CAN TRUST' },
+    tagSm: { zh: '一口，讓你愛上', en: "One sip, and you'll" },
+    tagLg: { zh: '這個味道！', en: 'fall in love' },
+    f1:  { zh: '嚴選茶葉', en: 'Carefully Selected Tea Leaves' },
+    f2:  { zh: '香醇鮮奶', en: 'Premium Fresh Milk' },
+    f3:  { zh: 'Q彈珍珠', en: 'Chewy Tapioca Pearls' },
+    f4:  { zh: '完美比例', en: 'Perfect Balance' },
+    f1d: { zh: '茶香清新自然', en: 'Naturally fresh aroma' },
+    f2d: { zh: '濃郁順滑口感', en: 'Rich and creamy texture' },
+    f3d: { zh: '每日現煮製作', en: 'Cooked fresh every day' },
+    f4d: { zh: '茶奶黃金比例', en: 'Golden ratio of tea and milk' },
+    sEb:    { zh: '— 職人製茶 · 誠意滿分 —', en: '— CRAFTED WITH CARE —' },
+    sTitle: { zh: '每一杯，都是對品質的堅持', en: 'Every cup, a commitment to quality' },
+    sLead:  { zh: '從一片茶葉到一杯手搖，我們只用最實在的用料，日日新鮮、真材實料，喝得到的安心。',
+              en: 'From a single tea leaf to a finished cup, we use only the most honest ingredients — fresh every day, real and wholesome, peace of mind you can taste.' },
+    s1h: { zh: '高山茶園直送', en: 'Straight from Highland Tea Gardens' },
+    s1p: { zh: '精選南投海拔 800m 高山茶菁，日光萎凋、手工烘焙，茶香清新回甘不苦澀。',
+           en: 'Hand-picked high-mountain leaves from Nantou at 800m, sun-withered and hand-roasted for a clean, mellow finish.' },
+    s2h: { zh: '當日契作鮮乳', en: 'Same-Day Contract-Farm Milk' },
+    s2p: { zh: '在地契作牧場當日直送生乳，乳香濃醇滑順，與茶香完美交融不甜膩。',
+           en: 'Fresh milk delivered the same day from local partner farms — rich, smooth and never cloying.' },
+    s3h: { zh: '每日新鮮現煮', en: 'Freshly Cooked Every Day' },
+    s3p: { zh: '珍珠、仙草每日職人現做現煮，Q彈軟糯只賣當天，賣完為止絕不隔夜。',
+           en: 'Pearls and grass jelly cooked fresh by hand each morning — chewy, tender, and only ever sold on the day.' },
+    czTitle:   { zh: '客製你的專屬飲品', en: 'Customise Your Own Drink' },
+    czSub:     { zh: '選基底 · 加配料 · 調冰量，一杯剛剛好', en: 'Pick a base · add a topping · choose your ice — made just right' },
+    czBase:    { zh: '基底', en: 'Base' },
+    czTopping: { zh: '配料', en: 'Topping' },
+    czIce:     { zh: '冰量', en: 'Ice' },
+    bMilkgreen:{ zh: '奶綠', en: 'Milk Green Tea' },
+    bMilktea:  { zh: '奶茶', en: 'Milk Tea' },
+    bBlacktea: { zh: '紅茶', en: 'Black Tea' },
+    tPearl:    { zh: 'Q彈珍珠', en: 'Tapioca Pearls' },
+    tGrass:    { zh: '仙草凍', en: 'Grass Jelly' },
+    iNormal:   { zh: '正常冰', en: 'Regular Ice' },
+    iLess:     { zh: '少冰', en: 'Less Ice' },
+    iLight:    { zh: '微冰', en: 'Light Ice' },
+    czResult:  { zh: '你的組合', en: 'Your combo' },
+    czCta:     { zh: '加入購物車 →', en: 'Add to Cart →' },
+  };
+
+  const toggle = document.getElementById("langToggle");
+
+  function setLang(lang) {
+    window.__lang = lang;
+    document.documentElement.lang = lang === "en" ? "en" : "zh-Hant";
+
+    document.querySelectorAll("[data-i18n]").forEach((el) => {
+      const t = I18N[el.getAttribute("data-i18n")];
+      if (t && t[lang] != null) el.innerHTML = t[lang];
+    });
+
+    if (toggle) toggle.classList.toggle("is-en", lang === "en");
+    try { localStorage.setItem("mgt-lang", lang); } catch (e) {}
+    document.dispatchEvent(new CustomEvent("langchange", { detail: { lang } }));
+  }
+
+  if (toggle) {
+    toggle.addEventListener("click", () => {
+      setLang(window.__lang === "en" ? "zh" : "en");
+    });
+  }
+
+  // 初始語言：讀取上次選擇（預設中文）
+  let saved = "zh";
+  try { saved = localStorage.getItem("mgt-lang") || "zh"; } catch (e) {}
+  if (saved === "en") setLang("en");
+  else window.__lang = "zh";
 })();
