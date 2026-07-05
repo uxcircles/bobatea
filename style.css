@@ -721,3 +721,75 @@ body {
   }
   .story-no { font-size: 2rem; }
 }
+
+/* ==================== 語言切換 + 英文版 ==================== */
+.lang-toggle {
+  position: fixed;
+  top: 18px; right: 20px;
+  z-index: 200;
+  display: flex; align-items: center; gap: 0.35em;
+  padding: 0.4rem 0.95rem;
+  border-radius: 999px;
+  border: 1px solid rgba(217, 198, 122, 0.5);
+  background: rgba(13, 20, 8, 0.55);
+  backdrop-filter: blur(6px);
+  color: var(--cream);
+  font-family: "Noto Serif TC", serif;
+  font-size: 0.9rem; font-weight: 700; letter-spacing: 0.03em;
+  cursor: pointer;
+  transition: border-color 0.2s ease, transform 0.2s ease;
+}
+.lang-toggle:hover { border-color: var(--green-bright); transform: translateY(-1px); }
+.lang-toggle .lang-sep { opacity: 0.4; }
+.lang-toggle .lang-zh-opt { color: var(--green-bright); }
+.lang-toggle .lang-en-opt { opacity: 0.55; }
+.lang-toggle.is-en .lang-zh-opt { color: var(--cream); opacity: 0.55; }
+.lang-toggle.is-en .lang-en-opt { color: var(--green-bright); opacity: 1; }
+
+/* ---- 英文版：hero 標題（Playfair 大寫襯線，維持金色）---- */
+html[lang="en"] .tz-line {
+  font-family: "Playfair Display", serif;
+  font-weight: 800;
+  text-transform: uppercase;
+  font-size: clamp(2.6rem, 6.6vw, 5.8rem);
+  letter-spacing: 0.01em;
+  line-height: 0.98;
+}
+html[lang="en"] .tz-line + .tz-line { margin-top: 0.02em; }
+html[lang="en"] .title-en { font-size: clamp(1.15rem, 2.3vw, 2.1rem); top: 34%; }
+
+/* ---- 英文版：標語用 Alex Brush 花體 ---- */
+html[lang="en"] .tagline-sm,
+html[lang="en"] .tagline-lg { font-family: "Alex Brush", cursive; }
+html[lang="en"] .tagline-sm { font-size: clamp(1.2rem, 2vw, 1.9rem); margin-right: 2.5em; }
+html[lang="en"] .tagline-lg { font-size: clamp(2.8rem, 5vw, 4.8rem); }
+
+/* ---- 英文版：特色只顯示標題 ---- */
+html[lang="en"] .feature-desc { display: none; }
+html[lang="en"] .feature-title {
+  text-transform: uppercase;
+  font-size: 0.68rem;
+  letter-spacing: 0.05em;
+  line-height: 1.35;
+  max-width: 8em;
+  white-space: normal;
+}
+
+/* ---- 英文版：徽章文字較長，縮小 ---- */
+html[lang="en"] .badge-top,
+html[lang="en"] .badge-bottom {
+  font-size: 0.5rem;
+  letter-spacing: 0.05em;
+  line-height: 1.28;
+  padding: 0 0.2rem;
+}
+html[lang="en"] .badge-big { font-size: 1.5rem; }
+
+/* ---- 英文版：段落標題用 Playfair ---- */
+html[lang="en"] .story-title,
+html[lang="en"] .cz-title { font-family: "Playfair Display", "Noto Serif TC", serif; }
+
+@media (max-width: 860px) {
+  .lang-toggle { top: 14px; right: 14px; padding: 0.35rem 0.8rem; font-size: 0.82rem; }
+  html[lang="en"] .tz-line { font-size: clamp(2.4rem, 12vw, 4.2rem); }
+}
