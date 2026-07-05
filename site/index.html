@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>極致奶綠 · Milk Green Tea</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Alex+Brush&family=Noto+Serif+TC:wght@500;700;900&display=swap" rel="stylesheet" />
+  <!-- 辰宇落雁體（emfont，OFL 免費可商用，動態子集化） -->
+  <link rel="stylesheet" href="https://font.emtech.cc/css/ChenYuLuoYan" />
+  <link rel="stylesheet" href="style.css?v=2" />
+</head>
+<body>
+  <section class="hero" id="hero">
+    <!-- 背景層（視差） -->
+    <div class="layer layer-bg" data-depth="0.12"></div>
+    <div class="hero-vignette"></div>
+
+    <!-- 漂浮葉子（外層滑鼠視差 / 內層 idle 浮動）— 依參考圖：前景清晰、遠景模糊 -->
+    <div class="leaf-wrap leaf--tl" data-depth="1.3"><img class="leaf" src="assets/leaf6.png" alt="" /></div>
+    <div class="leaf-wrap leaf--ml" data-depth="1.1"><img class="leaf" src="assets/leaf2.png" alt="" /></div>
+    <div class="leaf-wrap leaf--tc" data-depth="0.6"><img class="leaf" src="assets/leaf3.png" alt="" /></div>
+    <div class="leaf-wrap leaf--r"  data-depth="0.5"><img class="leaf" src="assets/leaf4.png" alt="" /></div>
+    <div class="leaf-wrap leaf--bl" data-depth="1.9"><img class="leaf" src="assets/leaf5.png" alt="" /></div>
+    <div class="leaf-wrap leaf--br" data-depth="1.6"><img class="leaf" src="assets/leaf1.png" alt="" /></div>
+
+    <!-- 左側文字 -->
+    <div class="hero-copy" data-depth="0.25">
+      <div class="title-group">
+        <div class="eyebrow">
+          <span class="line"></span>
+          <span>清新茶香 <em>×</em> 濃郁奶香</span>
+          <span class="line"></span>
+        </div>
+
+        <h1 class="title">
+          <span class="title-zh"><span class="tz-line">極致</span><span class="tz-line">奶綠</span></span>
+          <span class="title-en">Milk Green<br />Tea</span>
+        </h1>
+      </div>
+
+      <p class="subtitle">茶香清新・奶香濃郁・口感滑順</p>
+
+      <a class="cta" href="#">立即品嚐 →</a>
+    </div>
+
+    <!-- 珍奶（坐在石板上） -->
+    <div class="hero-cup" data-depth="0.4" data-base="translateX(-50%)">
+      <img class="splash" src="assets/splash.png" alt="" data-depth="0.25" data-base="translate(-50%, -50%)" />
+      <div class="cup-stack">
+        <img class="cup active" src="assets/MilkGreenTea.png" alt="極致奶綠珍珠奶茶" />
+      </div>
+    </div>
+
+    <!-- 右上角印章徽章（靜止） -->
+    <div class="badge" data-depth="0.35">
+      <span class="badge-top">每日現泡</span>
+      <span class="badge-big">100%</span>
+      <span class="badge-bottom">安心好茶</span>
+      <span class="badge-leaf"><img src="assets/leaf.png" alt="" /></span>
+    </div>
+
+    <!-- 右側標語（橫排） -->
+    <div class="tagline" data-depth="0.3">
+      <span class="tagline-sm">一口，讓你愛上</span>
+      <span class="tagline-lg">這個味道！</span>
+    </div>
+
+    <!-- 左下特色列 -->
+    <div class="features" data-depth="0.2">
+      <div class="feature">
+        <span class="feature-icon"><img src="assets/icon-leaf.png" alt="" /></span>
+        <span class="feature-title">嚴選茶葉</span>
+        <span class="feature-desc">茶香清新自然</span>
+      </div>
+      <span class="feature-sep"></span>
+      <div class="feature">
+        <span class="feature-icon"><img src="assets/icon-milk.png" alt="" /></span>
+        <span class="feature-title">香醇鮮奶</span>
+        <span class="feature-desc">濃郁順滑口感</span>
+      </div>
+      <span class="feature-sep"></span>
+      <div class="feature">
+        <span class="feature-icon"><img src="assets/icon-boba.png" alt="" /></span>
+        <span class="feature-title">Q彈珍珠</span>
+        <span class="feature-desc">每日現煮製作</span>
+      </div>
+      <span class="feature-sep"></span>
+      <div class="feature">
+        <span class="feature-icon"><img src="assets/icon-sugar.png" alt="" /></span>
+        <span class="feature-title">完美比例</span>
+        <span class="feature-desc">茶奶黃金比例</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== 品牌故事帶 ===== -->
+  <section class="story" id="story">
+    <div class="story-inner">
+      <span class="story-eyebrow">— 職人製茶 · 誠意滿分 —</span>
+      <h2 class="story-title">每一杯，都是對品質的堅持</h2>
+      <p class="story-lead">從一片茶葉到一杯手搖，我們只用最實在的用料，日日新鮮、真材實料，喝得到的安心。</p>
+
+      <div class="story-grid">
+        <div class="story-item">
+          <span class="story-no">01</span>
+          <h3 class="story-h3">高山茶園直送</h3>
+          <p class="story-p">精選南投海拔 800m 高山茶菁，日光萎凋、手工烘焙，茶香清新回甘不苦澀。</p>
+        </div>
+        <div class="story-item">
+          <span class="story-no">02</span>
+          <h3 class="story-h3">當日契作鮮乳</h3>
+          <p class="story-p">在地契作牧場當日直送生乳，乳香濃醇滑順，與茶香完美交融不甜膩。</p>
+        </div>
+        <div class="story-item">
+          <span class="story-no">03</span>
+          <h3 class="story-h3">每日新鮮現煮</h3>
+          <p class="story-p">珍珠、仙草每日職人現做現煮，Q彈軟糯只賣當天，賣完為止絕不隔夜。</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== 客製化飲品 ===== -->
+  <section class="customize" id="customize">
+    <div class="cz-inner">
+      <div class="cz-head">
+        <span class="cz-eyebrow">— DIY YOUR DRINK —</span>
+        <h2 class="cz-title">客製你的專屬飲品</h2>
+        <p class="cz-sub">選基底 · 加配料 · 調冰量，一杯剛剛好</p>
+      </div>
+
+      <div class="cz-body">
+        <!-- 即時預覽 -->
+        <div class="cz-preview">
+          <div class="cz-glow"></div>
+          <img id="cz-cup" class="cz-cup" src="assets/milk-green-tea-boba.png" alt="客製化飲品預覽" />
+        </div>
+
+        <!-- 選項 -->
+        <div class="cz-options">
+          <div class="cz-group">
+            <span class="cz-label">基底</span>
+            <div class="cz-btns" data-group="base">
+              <button class="cz-btn is-active" data-value="milkgreen">奶綠</button>
+              <button class="cz-btn" data-value="milktea">奶茶</button>
+              <button class="cz-btn" data-value="blacktea">紅茶</button>
+            </div>
+          </div>
+
+          <div class="cz-group">
+            <span class="cz-label">配料</span>
+            <div class="cz-btns" data-group="topping">
+              <button class="cz-btn is-active" data-value="pearl">Q彈珍珠</button>
+              <button class="cz-btn" data-value="grass">仙草凍</button>
+            </div>
+          </div>
+
+          <div class="cz-group">
+            <span class="cz-label">冰量</span>
+            <div class="cz-btns" data-group="ice">
+              <button class="cz-btn is-active" data-value="normal">正常冰</button>
+              <button class="cz-btn" data-value="less">少冰</button>
+              <button class="cz-btn" data-value="light">微冰</button>
+            </div>
+          </div>
+
+          <div class="cz-result">
+            <span class="cz-result-label">你的組合</span>
+            <strong id="cz-summary" class="cz-summary">奶綠 · Q彈珍珠 · 正常冰</strong>
+          </div>
+
+          <a class="cz-cta" href="#">加入購物車 →</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <script src="script.js?v=8"></script>
+</body>
+</html>

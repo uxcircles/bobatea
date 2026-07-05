@@ -1,0 +1,723 @@
+:root {
+  --green-deep: #1c2a12;
+  --green-mid: #3a5220;
+  --green-bright: #BBC752;
+  --cream: #f4f0d8;
+  --gold: #d9c67a;
+  --ink: #eaf3d8;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: "Noto Serif TC", serif;
+  background: #0d1408;
+  color: var(--ink);
+  overflow-x: hidden;
+}
+
+/* ---------- HERO ---------- */
+.hero {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  min-height: 560px;
+  overflow: hidden;
+  isolation: isolate;
+}
+
+/* 背景層：視差用，做大一點留位移空間 */
+.layer-bg {
+  position: absolute;
+  inset: -8% -5% -2% -5%;
+  /* 靠底部對齊：讓石板永遠固定在畫面下方，不隨視窗比例漂移 */
+  background: url("assets/bg.png") center bottom / cover no-repeat;
+  z-index: -3;
+  will-change: transform;
+}
+
+.hero-vignette {
+  position: absolute;
+  inset: 0;
+  z-index: -2;
+  background:
+    radial-gradient(120% 90% at 30% 40%, transparent 40%, rgba(8, 14, 4, 0.5) 100%),
+    linear-gradient(90deg, rgba(10, 18, 5, 0.72) 0%, rgba(10, 18, 5, 0.12) 45%, transparent 70%);
+  pointer-events: none;
+}
+
+/* ---------- 左側文字 ---------- */
+.hero-copy {
+  position: absolute;
+  left: 6.5%;
+  top: 12%;
+  width: min(46%, 620px);
+  z-index: 4;
+  will-change: transform;
+}
+
+/* kicker + 標題成一組，寬度取兩者較寬者，內部置中 → 標題與 kicker 中心對齊 */
+.title-group {
+  display: inline-block;
+  text-align: center;
+}
+
+.eyebrow {
+  display: flex;
+  align-items: center;
+  justify-content: center;   /* kicker 內容在組內置中 */
+  gap: 0.9rem;
+  color: var(--cream);
+  font-size: clamp(0.8rem, 1.2vw, 1.1rem);
+  letter-spacing: 0.18em;
+  margin-bottom: 0.9rem;
+}
+.eyebrow em { color: var(--gold); font-style: normal; padding: 0 0.15em; }
+.eyebrow .line {
+  height: 1px; width: 42px;
+  background: linear-gradient(90deg, transparent, var(--gold));
+}
+.eyebrow .line:last-child { background: linear-gradient(90deg, var(--gold), transparent); }
+
+.title {
+  position: relative;
+  line-height: 0.9;
+  margin-bottom: 1.3rem;
+  display: inline-block;
+}
+.title-zh {
+  position: relative;
+  z-index: 2;                 /* 在 Milk Green Tea 之上 */
+  display: block;
+  font-weight: 900;
+  font-size: clamp(3.8rem, 9.5vw, 8.4rem);
+  letter-spacing: 0.04em;
+}
+/* 每一行各自套用漸層，讓「極致」「奶綠」外觀一致（乾淨淺金→金，無中段亮帶）*/
+.tz-line {
+  display: block;
+  line-height: 1.0;          /* 行框蓋滿字身，避免字上緣被裁切 */
+  color: #fff;
+  /* 上緣反光帶：白色在 46% 達到最亮，54% 急遽轉暗 → 形成金屬反光線 */
+  background: linear-gradient(180deg,
+    #e7e2ce 0%,
+    #fffdf4 40%,
+    #ffffff 46%,
+    #d8cca4 54%,     /* 反光線下方陰面 */
+    #eddfba 74%,
+    #a9884c 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  /* 浮雕立體：上緣白邊 + 下緣暗邊 + 柔和落影 */
+  text-shadow:
+    0 -1px 0 rgba(255, 255, 255, 0.35),
+    0 2px 1px rgba(70, 50, 10, 0.35),
+    0 6px 20px rgba(0, 0, 0, 0.45);
+}
+.tz-line + .tz-line { margin-top: -0.04em; }  /* 兩行間距（負值越小越分開）*/
+.title-en {
+  position: absolute;
+  z-index: 1;                 /* 在 極致奶綠 之下 */
+  right: -3.5em;              /* 往右移到字與杯之間的空隙 */
+  top: 30%;
+  transform: rotate(-8deg);
+  font-family: "Alex Brush", cursive;
+  font-weight: 400;
+  font-size: clamp(1.7rem, 3.2vw, 3rem);
+  line-height: 1.0;
+  color: var(--green-bright);
+  opacity: 0.7;
+  text-shadow: 0 4px 18px rgba(0,0,0,0.45);
+  pointer-events: none;
+}
+
+.subtitle {
+  font-size: clamp(0.95rem, 1.6vw, 1.4rem);
+  color: var(--cream);
+  letter-spacing: 0.12em;
+  margin-bottom: 1.8rem;
+  text-shadow: 0 2px 10px rgba(0,0,0,0.6);
+}
+
+.cta {
+  display: inline-block;
+  padding: 0.8rem 2.1rem;
+  border-radius: 999px;
+  background: linear-gradient(135deg, var(--green-bright), #6f9e2c);
+  color: #10200a;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-decoration: none;
+  box-shadow: 0 10px 30px rgba(143, 191, 63, 0.35);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+.cta:hover { transform: translateY(-3px); box-shadow: 0 16px 40px rgba(143, 191, 63, 0.5); }
+
+/* ---------- 珍奶（坐在石板上） ---------- */
+.hero-cup {
+  position: absolute;
+  left: 60%;
+  bottom: 8%;              /* 杯底位置（數字越大越往上）*/
+  transform: translateX(-50%);
+  z-index: 3;
+  will-change: transform;
+}
+
+.splash {
+  position: absolute;
+  width: 240%;
+  left: 52%;
+  top: 45%;
+  transform: translate(-50%, -50%);
+  z-index: -1;               /* 在杯子後方 */
+  pointer-events: none;
+  filter: drop-shadow(0 12px 24px rgba(0,0,0,0.35));
+  will-change: transform;    /* 改由 JS 做滑鼠視差，不再呼吸脈動 */
+}
+
+.cup-stack {
+  position: relative;
+  width: clamp(280px, 26vw, 345px);
+  aspect-ratio: 489 / 919;   /* 對齊裁切後的珍奶圖比例（窄高）*/
+  transform: translateX(40px) translateY(10px) rotate(5deg);   /* 位移 + 向右旋轉 */
+}
+.cup {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: bottom;
+  filter: drop-shadow(0 26px 40px rgba(0, 0, 0, 0.55));
+  opacity: 0;
+  visibility: hidden;
+}
+.cup.active { opacity: 1; visibility: visible; }
+
+/* ---------- 葉子 ---------- */
+/* 外層 wrapper：由 JS 控制滑鼠視差位移 */
+.leaf-wrap {
+  position: absolute;
+  z-index: 2;
+  pointer-events: none;
+  will-change: transform;
+}
+/* 內層 img：CSS idle 浮動（與 wrapper 的 transform 疊加不衝突） */
+.leaf {
+  display: block;
+  width: 100%;
+  filter: drop-shadow(0 10px 16px rgba(0,0,0,0.45));
+  will-change: transform;
+}
+/* 依參考圖重新配置葉子位置 */
+.leaf--tl { top: 10%;   left: 30%;  width: 160px; z-index: 2; }  /* 上方，濃郁奶香左下 */
+.leaf--ml { bottom: 25%; left: 35%; width: 100px; z-index: 2; }  /* 「致」右側（英文旁）*/
+.leaf--tc { top: 5%;    left: 55%;  width: 90px;  z-index: 1; }  /* 杯蓋右上（遠景模糊）*/
+.leaf--r  { top: 30%;   right: 3%;  width: 95px;  z-index: 1; }  /* 最右側，標語旁 */
+.leaf--bl { bottom: 36%; left: -3%; width: 180px; z-index: 5; }  /* 左下，奶綠左側 */
+.leaf--br { bottom: 2%;  left: 62%; width: 200px; z-index: 5; }  /* 石板右下，杯底旁 */
+
+/* 前景葉子：底部漸層霧化，讓葉子淡入背景霧氣（leaf--br 已移除霧化，保持清晰）*/
+.leaf--bl .leaf {
+  filter: blur(0.4px) drop-shadow(0 10px 16px rgba(0,0,0,0.45));
+  -webkit-mask-image: linear-gradient(205deg, #000 42%, rgba(0,0,0,0.35) 74%, transparent 96%);
+          mask-image: linear-gradient(205deg, #000 42%, rgba(0,0,0,0.35) 74%, transparent 96%);
+}
+
+/* 遠景 / 半景葉子：加景深模糊 + 半透明 */
+.leaf--ml .leaf { filter: blur(1.5px) drop-shadow(0 8px 14px rgba(0,0,0,0.4)); opacity: 0.85; }
+.leaf--tc .leaf { filter: blur(2.5px) drop-shadow(0 6px 12px rgba(0,0,0,0.4)); opacity: 0.7; }
+.leaf--r  .leaf { filter: blur(4px)   drop-shadow(0 6px 12px rgba(0,0,0,0.4)); opacity: 0.8; }
+
+.leaf--tl .leaf { animation: float1 7s   ease-in-out infinite; }
+.leaf--ml .leaf { animation: float2 6s   ease-in-out infinite; }
+.leaf--tc .leaf { animation: float3 8s   ease-in-out infinite; }
+.leaf--r  .leaf { animation: float2 7.5s ease-in-out infinite; }
+.leaf--bl .leaf { animation: float1 6.5s ease-in-out infinite; }
+.leaf--br .leaf { animation: float3 7s   ease-in-out infinite; }
+
+@keyframes float1 {
+  0%,100% { transform: translateY(0) rotate(-6deg); }
+  50%     { transform: translateY(-14px) rotate(3deg); }
+}
+@keyframes float2 {
+  0%,100% { transform: translateY(0) rotate(8deg); }
+  50%     { transform: translateY(-11px) rotate(-5deg); }
+}
+@keyframes float3 {
+  0%,100% { transform: translateY(0) rotate(3deg); }
+  50%     { transform: translateY(-17px) rotate(-8deg); }
+}
+
+/* ---------- 徽章（靜止） ---------- */
+.badge {
+  position: absolute;
+  top: 6%;
+  right: 4.5%;
+  width: 140px;
+  height: 140px;
+  padding: 14px;            /* 文字與邊框留白 */
+  border-radius: 50%;
+  border: 2px solid rgba(217, 198, 122, 0.85);
+  background: radial-gradient(circle at 50% 40%, rgba(40, 60, 20, 0.32), rgba(15, 25, 8, 0.45));
+  backdrop-filter: blur(7px);   /* 霧玻璃霧化 */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  color: var(--cream);
+  z-index: 5;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+  will-change: transform;
+}
+/* 內圈細環 */
+.badge::before {
+  content: "";
+  position: absolute;
+  inset: 9px;
+  border-radius: 50%;
+  border: 1px solid rgba(217, 198, 122, 0.55);
+  pointer-events: none;
+}
+.badge-top, .badge-bottom { font-size: 0.75rem; letter-spacing: 0.1em; }
+.badge-big { font-size: 1.7rem; font-weight: 900; color: var(--green-bright); line-height: 1.2; }
+.badge-leaf { margin-top: 0.25rem; line-height: 0; }
+.badge-leaf img { width: 20px; height: auto; display: block; }
+
+/* ---------- 橫排標語 ---------- */
+.tagline {
+  position: absolute;
+  right: 4%;
+  top: 40%;
+  z-index: 4;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  text-align: right;
+  will-change: transform;
+}
+.tagline-sm {
+  font-family: "ChenYuLuoYan", "Noto Serif TC", serif;
+  font-size: clamp(1.1rem, 1.7vw, 1.6rem);
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  color: var(--green-bright);
+  margin-right: 5em;        /* 往左錯開 */
+  transform: rotate(-4deg);
+  text-shadow: 0 2px 10px rgba(0,0,0,0.6);
+}
+.tagline-lg {
+  position: relative;
+  font-family: "ChenYuLuoYan", "Noto Serif TC", serif;
+  font-size: clamp(2.6rem, 4.4vw, 4.4rem);
+  color: var(--green-bright);
+  line-height: 1.1;
+  margin-top: 0.15em;
+  transform: rotate(-3deg);
+  text-shadow: 0 3px 16px rgba(0,0,0,0.6);
+}
+.tagline-lg::after {         /* 手繪底線 */
+  content: "";
+  position: absolute;
+  left: 0.1em;
+  right: 0.9em;
+  bottom: -0.08em;
+  height: 3px;
+  background: linear-gradient(90deg, transparent, var(--green-bright) 20%, var(--green-bright) 85%, transparent);
+  border-radius: 3px;
+  transform: skewX(-14deg);
+}
+
+/* ---------- 左下特色 ---------- */
+.features {
+  position: absolute;
+  left: 6.5%;
+  bottom: 10%;
+  display: flex;
+  align-items: center;
+  gap: 0.9rem;
+  z-index: 4;
+  max-width: 90vw;
+  will-change: transform;
+}
+.feature {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  min-width: 84px;
+}
+/* 圓圈線稿圖示 */
+.feature-icon {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  border: 1px solid rgba(217, 198, 122, 0.55);
+  /* 圈內霧化：只保留霧玻璃模糊，不加內部漸層 */
+  backdrop-filter: blur(7px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 0.6rem;
+}
+.feature-icon img {
+  width: 58%;
+  height: 58%;
+  object-fit: contain;
+  filter: drop-shadow(0 2px 5px rgba(0,0,0,0.4));
+}
+.feature-title { font-weight: 700; font-size: 0.95rem; color: #fff; letter-spacing: 0.05em; }
+.feature-desc { font-size: 0.7rem; color: var(--cream); opacity: 0.8; margin-top: 0.2rem; }
+/* 圓圈間的小圓點 */
+.feature-sep {
+  align-self: flex-start;
+  margin-top: 28px;
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: rgba(217, 198, 122, 0.6);
+  flex: 0 0 auto;
+}
+
+/* ---------- RWD ---------- */
+@media (max-width: 860px) {
+  .hero {
+    height: auto;
+    min-height: 135vh;          /* 拉高，讓珍奶能絕對定位坐在底部石頭上 */
+    padding: 8.5rem 0 0;
+  }
+
+  .hero-copy {
+    position: relative;
+    left: auto; top: auto;
+    width: 90%;
+    margin: -7vh auto;
+    text-align: center;
+    z-index: 4;
+  }
+  .title-group { display: block; }
+  .eyebrow { justify-content: center; font-size: 0.85rem; }
+  /* inline-block：讓 .title 縮到剛好包住四個字，.title-en 的 left:100% 才會固定貼著文字右緣 */
+  .title { display: inline-block; margin-bottom: 0.2rem; }
+  .title-zh { font-size: clamp(5.2rem, 10.5vw, 8.4rem); }  /* 手機版微微加大 */
+  /* 英文疊在中文右側（同桌機風格） */
+  .title-en {
+    position: absolute;
+    left: 100%; right: auto; bottom: auto;
+    top: 24%;
+    margin-left: -0.5em;      /* 與中文的水平間距 */
+    text-align: left;
+    transform: rotate(-8deg);
+    font-size: clamp(1.4rem, 6vw, 2rem);
+    opacity: 0.7;
+    white-space: nowrap;
+  }
+  .subtitle { margin: 0.8rem 0 0; }   /* 與標題間距 */
+  .cta { margin-top: 1.8rem; }        /* 與按鈕拉開 */
+
+  .hero-cup {
+    position: absolute;
+    left: 50%;
+    bottom: 20%;                 /* 石頭約在底部 20% 處 → 珍奶坐在石頭上 */
+    top: auto;
+    transform: translateX(-50%);
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    z-index: 3;
+  }
+  /* 置中（清掉桌機的 translateX/Y 位移），保留旋轉 */
+  .cup-stack { width: min(75vw, 280px); transform: translateY(120px) rotate(5deg); }
+  .splash { width: 260%; top: 65%; bottom: auto; }
+
+  .badge {
+    top: 80vh; right: 40px;
+    width: 102px; height: 102px;
+    padding: 11px;           /* 文字與邊框留白 */
+  }
+  .badge::before { inset: 6px; }
+  .badge-big { font-size: 1.35rem; }
+  .badge-top, .badge-bottom { font-size: 0.64rem; }
+  .badge-leaf { font-size: 0.72rem; }
+
+  .tagline { display: none; }
+
+  /* 特色列：絕對定位在最底、單排 4 個，疊在 splash 之上 */
+  .features {
+    position: absolute;
+    left: 50%;
+    bottom: 3%;
+    top: auto;
+    transform: translateX(-50%);
+    z-index: 6;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    gap: 0.55rem;
+    width: 96%;
+    margin: 0;
+    padding: 0;
+  }
+  .feature { min-width: 0; flex: 1 1 0; }
+  .feature-icon { width: 48px; height: 48px; margin-bottom: 0.35rem; }
+  .feature-title { font-size: 0.78rem; }
+  .feature-desc { display: none; }
+  .feature-sep { display: none; }
+
+  /* 手機版重新配置葉子座標，讓它們散佈在標題與珍奶周圍 */
+  .leaf--ml, .leaf--tc, .leaf--r, .leaf--bl, .leaf--br { display: block; }
+  .leaf--tl { top: 9%;   bottom: auto; left: 4%;   right: auto; width: 114px; }  /* 標題左上 */
+  .leaf--tc { top: 17%;  bottom: auto; left: auto; right: 5%;   width: 84px;  }  /* 標題右側（模糊遠景）*/
+  .leaf--ml { top: 40%;  bottom: auto; left: 3%;   right: auto; width: 90px;  }  /* 中段左 */
+  .leaf--r  { top: 46%;  bottom: auto; left: auto; right: 3%;   width: 108px; }  /* 中段右（模糊遠景）*/
+  .leaf--bl { display: none; }  /* 手機隱藏 */
+  .leaf--br { top: auto; bottom: 6%;   left: auto; right: 18%;  width: 140px; }  /* 珍奶右下 */
+}
+
+/* ==================== 客製化飲品 ==================== */
+.customize {
+  position: relative;
+  background:
+    radial-gradient(120% 80% at 50% 0%, rgba(58, 82, 32, 0.35), transparent 60%),
+    linear-gradient(180deg, #0d1408 0%, #131e0a 50%, #0d1408 100%);
+  color: var(--ink);
+  padding: 5.5rem 5% 6rem;
+  overflow: hidden;
+}
+.cz-inner { width: min(1100px, 100%); margin: 0 auto; }
+
+.cz-head { text-align: center; margin-bottom: 3rem; }
+.cz-eyebrow {
+  display: block;
+  color: var(--gold);
+  letter-spacing: 0.35em;
+  font-size: 0.85rem;
+  margin-bottom: 0.8rem;
+}
+.cz-title {
+  font-family: "Noto Serif TC", serif;
+  font-weight: 900;
+  font-size: clamp(1.9rem, 4vw, 3rem);
+  color: #fff;
+  letter-spacing: 0.06em;
+}
+.cz-title-en, .cz-sub {
+  color: var(--cream);
+}
+.cz-sub {
+  margin-top: 0.7rem;
+  font-size: clamp(0.9rem, 1.5vw, 1.1rem);
+  letter-spacing: 0.1em;
+  opacity: 0.85;
+}
+
+.cz-body {
+  display: grid;
+  grid-template-columns: 0.9fr 1.1fr;
+  gap: clamp(2rem, 5vw, 4rem);
+  align-items: center;
+}
+
+/* 預覽 */
+.cz-preview {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  min-height: 420px;
+}
+.cz-glow {
+  position: absolute;
+  width: 82%;
+  aspect-ratio: 1;
+  left: 50%;
+  bottom: 4%;
+  transform: translateX(-50%);
+  background: radial-gradient(circle, rgba(187, 199, 82, 0.28), transparent 62%);
+  filter: blur(8px);
+  z-index: 0;
+}
+.cz-cup {
+  position: relative;
+  z-index: 1;
+  width: clamp(220px, 24vw, 320px);
+  filter: drop-shadow(0 24px 34px rgba(0, 0, 0, 0.55));
+  transition: opacity 0.16s ease, transform 0.16s ease;
+  transform-origin: 50% 85%;
+}
+/* 離場：快速縮小淡出 */
+.cz-cup.is-out { opacity: 0; transform: scale(0.85) translateY(8px); }
+/* 進場：從小放大回彈（overshoot） */
+.cz-cup.is-in { animation: czPopIn 0.52s cubic-bezier(0.34, 1.56, 0.64, 1); }
+@keyframes czPopIn {
+  0%   { opacity: 0; transform: scale(0.85) translateY(8px); }
+  100% { opacity: 1; transform: scale(1) translateY(0); }
+}
+
+/* 選項 */
+.cz-options { display: flex; flex-direction: column; gap: 1.6rem; }
+.cz-group { display: flex; flex-direction: column; gap: 0.7rem; }
+.cz-label {
+  font-size: 0.95rem;
+  color: var(--gold);
+  letter-spacing: 0.15em;
+  font-weight: 700;
+}
+.cz-btns { display: flex; flex-wrap: wrap; gap: 0.7rem; }
+.cz-btn {
+  font-family: "Noto Serif TC", serif;
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--cream);
+  padding: 0.6rem 1.4rem;
+  border-radius: 999px;
+  border: 1px solid rgba(217, 198, 122, 0.35);
+  background: rgba(20, 30, 12, 0.5);
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+.cz-btn:hover { border-color: var(--green-bright); color: #fff; }
+.cz-btn.is-active {
+  background: linear-gradient(135deg, var(--green-bright), #7f9a2e);
+  color: #17240b;
+  border-color: transparent;
+  box-shadow: 0 6px 18px rgba(187, 199, 82, 0.35);
+}
+
+.cz-result {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  margin-top: 0.5rem;
+  padding-top: 1.4rem;
+  border-top: 1px solid rgba(217, 198, 122, 0.2);
+}
+.cz-result-label { color: var(--cream); opacity: 0.7; font-size: 0.9rem; letter-spacing: 0.1em; }
+.cz-summary { color: #fff; font-size: 1.2rem; letter-spacing: 0.05em; }
+
+.cz-cta {
+  display: inline-block;
+  align-self: flex-start;
+  margin-top: 0.6rem;
+  padding: 0.9rem 2.4rem;
+  border-radius: 999px;
+  background: linear-gradient(135deg, var(--green-bright), #6f9e2c);
+  color: #10200a;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-decoration: none;
+  box-shadow: 0 10px 30px rgba(187, 199, 82, 0.35);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+.cz-cta:hover { transform: translateY(-3px); box-shadow: 0 16px 40px rgba(187, 199, 82, 0.5); }
+
+@media (max-width: 860px) {
+  .customize { padding: 4rem 6% 4.5rem; }
+  .cz-head { margin-bottom: 2rem; }
+  .cz-body { grid-template-columns: 1fr; gap: 2rem; }
+  .cz-preview { min-height: 320px; }
+  .cz-options { align-items: center; text-align: center; }
+  .cz-group { align-items: center; }
+  .cz-btns { justify-content: center; }
+  .cz-result { justify-content: center; flex-wrap: wrap; gap: 0.4rem; }
+  .cz-cta { align-self: center; }
+}
+
+/* ==================== 品牌故事帶 ==================== */
+.story {
+  position: relative;
+  background: linear-gradient(180deg, #0d1408 0%, #16220c 100%);
+  color: var(--ink);
+  padding: 5rem 5% 5.5rem;
+  text-align: center;
+  border-top: 1px solid rgba(217, 198, 122, 0.12);
+}
+.story-inner { width: min(1080px, 100%); margin: 0 auto; }
+.story-eyebrow {
+  display: block;
+  color: var(--gold);
+  letter-spacing: 0.3em;
+  font-size: 0.85rem;
+  margin-bottom: 0.9rem;
+}
+.story-title {
+  font-family: "Noto Serif TC", serif;
+  font-weight: 900;
+  font-size: clamp(1.7rem, 3.6vw, 2.7rem);
+  color: #fff;
+  letter-spacing: 0.05em;
+}
+.story-lead {
+  max-width: 640px;
+  margin: 1.1rem auto 0;
+  color: var(--cream);
+  font-size: clamp(0.92rem, 1.5vw, 1.08rem);
+  line-height: 1.9;
+  opacity: 0.85;
+}
+.story-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: clamp(1.5rem, 4vw, 3.5rem);
+  margin-top: 3.2rem;
+}
+.story-item {
+  position: relative;
+  padding: 0 0.5rem;
+}
+.story-item:not(:last-child)::after {
+  content: "";
+  position: absolute;
+  right: clamp(-0.75rem, -2vw, -1.75rem);
+  top: 12%;
+  height: 76%;
+  width: 1px;
+  background: linear-gradient(transparent, rgba(217, 198, 122, 0.3), transparent);
+}
+.story-no {
+  display: block;
+  font-family: "Noto Serif TC", serif;
+  font-weight: 900;
+  font-size: 2.4rem;
+  line-height: 1;
+  background: linear-gradient(180deg, #f4eeda, #c8a86a);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin-bottom: 0.9rem;
+}
+.story-h3 {
+  font-family: "Noto Serif TC", serif;
+  font-weight: 700;
+  font-size: clamp(1.1rem, 1.9vw, 1.4rem);
+  color: #fff;
+  letter-spacing: 0.05em;
+  margin-bottom: 0.7rem;
+}
+.story-p {
+  color: var(--cream);
+  font-size: 0.9rem;
+  line-height: 1.85;
+  opacity: 0.8;
+}
+
+@media (max-width: 860px) {
+  .story { padding: 3.5rem 8% 4rem; }
+  .story-grid {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+    margin-top: 2.4rem;
+  }
+  .story-item:not(:last-child)::after {
+    right: auto; top: auto;
+    left: 50%; bottom: -1rem;
+    transform: translateX(-50%);
+    width: 60%; height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(217,198,122,0.3), transparent);
+  }
+  .story-no { font-size: 2rem; }
+}
