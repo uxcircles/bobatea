@@ -255,7 +255,7 @@ body {
 /* ---------- 徽章（靜止） ---------- */
 .badge {
   position: absolute;
-  top: 6%;
+  top: 10%;
   right: 4.5%;
   width: 140px;
   height: 140px;
@@ -792,4 +792,11 @@ html[lang="en"] .cz-title { font-family: "Playfair Display", "Noto Serif TC", se
 @media (max-width: 860px) {
   .lang-toggle { top: 14px; right: 14px; padding: 0.35rem 0.8rem; font-size: 0.82rem; }
   html[lang="en"] .tz-line { font-size: clamp(2.4rem, 12vw, 4.2rem); }
+}
+
+/* 英文版桌機：標題與 kicker 置左對齊 */
+@media (min-width: 861px) {
+  html[lang="en"] .title-group { display: block; text-align: left; }
+  html[lang="en"] .eyebrow { justify-content: flex-start; }
+  html[lang="en"] .title-zh { text-align: left; }
 }
