@@ -134,7 +134,7 @@
     titleScript: { zh: 'Milk Green<br>Tea', en: 'Silky Smooth<br>Milk Green Tea' },
     sub:   { zh: '茶香清新・奶香濃郁・口感滑順', en: 'Refreshing tea notes, rich milky flavour, and a silky-smooth finish' },
     cta:   { zh: '立即品嚐 →', en: 'Order Now →' },
-    bTop:  { zh: '每日現泡', en: 'FRESHLY BREWED DAILY' },
+    bTop:  { zh: '每日現泡', en: 'FRESHLY<br>BREWED DAILY' },
     bBot:  { zh: '安心好茶', en: 'QUALITY YOU CAN TRUST' },
     tagSm: { zh: '一口，讓你愛上', en: "One sip, and you'll" },
     tagLg: { zh: '這個味道！', en: 'fall in love' },

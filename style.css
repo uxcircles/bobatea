@@ -316,7 +316,7 @@ body {
   font-size: clamp(2.6rem, 4.4vw, 4.4rem);
   color: var(--green-bright);
   line-height: 1.1;
-  margin-top: 0.15em;
+  margin-top: -0.15em;
   transform: rotate(-3deg);
   text-shadow: 0 3px 16px rgba(0,0,0,0.6);
 }
@@ -751,9 +751,9 @@ html[lang="en"] .tz-line {
   font-family: "Playfair Display", serif;
   font-weight: 800;
   text-transform: uppercase;
-  font-size: clamp(2.6rem, 6.6vw, 5.8rem);
+  font-size: clamp(2.6rem, 6.6vw, 5.4rem);
   letter-spacing: 0.01em;
-  line-height: 0.98;
+  line-height: 0.96;
 }
 html[lang="en"] .tz-line + .tz-line { margin-top: 0.02em; }
 html[lang="en"] .title-en { font-size: clamp(1.15rem, 2.3vw, 2.1rem); top: 34%; }
@@ -800,3 +800,13 @@ html[lang="en"] .cz-title { font-family: "Playfair Display", "Noto Serif TC", se
   html[lang="en"] .eyebrow { justify-content: flex-start; }
   html[lang="en"] .title-zh { text-align: left; }
 }
+
+/* 英文版：字距與英文花體位置微調 */
+html[lang="en"] .eyebrow  { letter-spacing: 0.12em; }
+html[lang="en"] .subtitle { letter-spacing: 0.05em; }
+html[lang="en"] .title-en { right: 2em; top: 40%; }
+
+html[lang="en"] .badge { padding: 14px 14px; }
+
+html[lang="en"] .badge-top,
+html[lang="en"] .badge-bottom { padding: 4px 0.2rem 0; }
