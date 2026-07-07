@@ -409,7 +409,7 @@ body {
     position: absolute;
     left: 100%; right: auto; bottom: auto;
     top: 24%;
-    margin-left: -0.5em;      /* 與中文的水平間距 */
+    margin-left: -3.5em;      /* 與中文的水平間距 */
     text-align: left;
     transform: rotate(-8deg);
     font-size: clamp(1.4rem, 6vw, 2rem);
@@ -443,6 +443,10 @@ body {
   .badge-big { font-size: 1.35rem; }
   .badge-top, .badge-bottom { font-size: 0.64rem; }
   .badge-leaf { font-size: 0.72rem; }
+  /* 英文版手機徽章字級 */
+  html[lang="en"] .badge-big { font-size: 1rem; }
+  html[lang="en"] .badge-top,
+  html[lang="en"] .badge-bottom { font-size: 0.4rem; }
 
   .tagline { display: none; }
 
@@ -810,3 +814,62 @@ html[lang="en"] .badge { padding: 14px 14px; }
 
 html[lang="en"] .badge-top,
 html[lang="en"] .badge-bottom { padding: 4px 0.2rem 0; }
+
+/* ==================== Hero 進場動畫（splash + 飲品彈入）==================== */
+.splash {
+  animation: heroSplashIn 1s cubic-bezier(0.34, 1.35, 0.5, 1) backwards;
+}
+.cup.active {
+  transform-origin: 50% 88%;
+  animation: heroCupIn 1.05s cubic-bezier(0.34, 1.5, 0.5, 1) 0.1s backwards;
+}
+@keyframes heroSplashIn {
+  0%   { opacity: 0; transform: translate(-50%, -50%) scale(0.55); }
+  100% { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+}
+@keyframes heroCupIn {
+  0%   { opacity: 0; transform: scale(0.7) translateY(26px); }
+  55%  { opacity: 1; }
+  100% { opacity: 1; transform: scale(1) translateY(0); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .splash, .cup.active { animation: none; }
+}
+
+/* ==================== Scroll 進場轉場 ==================== */
+[data-reveal] {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 0.7s ease, transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: opacity, transform;
+}
+[data-reveal].is-visible { opacity: 1; transform: none; }
+@media (prefers-reduced-motion: reduce) {
+  [data-reveal] { opacity: 1 !important; transform: none !important; transition: none !important; }
+}
+
+/* ==================== 頁尾 ==================== */
+.site-footer {
+  background: #0a1005;
+  border-top: 1px solid rgba(217, 198, 122, 0.14);
+  padding: 2.2rem 5%;
+  text-align: center;
+}
+.footer-credit {
+  font-family: "Noto Serif TC", serif;
+  font-size: 0.85rem;
+  letter-spacing: 0.12em;
+  color: rgba(244, 240, 216, 0.72);
+}
+.footer-credit a {
+  color: var(--gold);
+  text-decoration: none;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  transition: color 0.2s ease;
+}
+.footer-credit a:hover { color: var(--green-bright); }
+
+/* title-en（Milk Green Tea 花體）進場：保留旋轉，避免被 translateY 覆蓋 */
+[data-reveal].title-en { opacity: 0; transform: rotate(-8deg) translateY(16px); }
+[data-reveal].title-en.is-visible { opacity: 0.7; transform: rotate(-8deg); }

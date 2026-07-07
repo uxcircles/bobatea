@@ -45,7 +45,8 @@
     });
     requestAnimationFrame(tick);
   }
-  requestAnimationFrame(tick);
+  // 延遲啟動：讓 hero 進場動畫先跑完，視差再接手（避免覆蓋 splash 的 transform）
+  setTimeout(() => requestAnimationFrame(tick), 1150);
 })();
 
 // ===== 客製化飲品：按鈕切換 → 換圖 + 上色 + 更新摘要 =====
@@ -203,4 +204,40 @@
   try { saved = localStorage.getItem("mgt-lang") || "zh"; } catch (e) {}
   if (saved === "en") setLang("en");
   else window.__lang = "zh";
+})();
+
+// ===== Scroll 進場轉場（IntersectionObserver + 同段錯開）=====
+(function scrollReveal() {
+  const els = document.querySelectorAll("[data-reveal]");
+  if (!els.length) return;
+  if (!("IntersectionObserver" in window)) {
+    els.forEach((el) => el.classList.add("is-visible"));
+    return;
+  }
+
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach((e) => {
+      if (!e.isIntersecting) return;
+      const el = e.target;
+      // data-reveal 有數字 → 用它當順序；否則用同層索引錯開
+      const val = el.getAttribute("data-reveal");
+      let i;
+      if (val && !isNaN(parseFloat(val))) {
+        i = parseFloat(val);
+      } else {
+        const sibs = [...el.parentElement.querySelectorAll(":scope > [data-reveal]")];
+        i = Math.max(0, sibs.indexOf(el));
+      }
+      el.style.transitionDelay = (i * 0.13) + "s";
+      el.classList.add("is-visible");
+      // 轉場結束後移除，讓元素恢復自身樣式/互動（例如按鈕 hover）
+      el.addEventListener("transitionend", () => {
+        el.style.transitionDelay = "";
+        el.removeAttribute("data-reveal");
+      }, { once: true });
+      io.unobserve(el);
+    });
+  }, { threshold: 0.15, rootMargin: "0px 0px 0px 0px" });
+
+  els.forEach((el) => io.observe(el));
 })();
