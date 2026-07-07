@@ -5,3 +5,7 @@ node_modules/
 /*.png
 /*.ttf
 /untitled folder/
+
+# 影片（勿進 repo）
+*.mov
+*.mp4

@@ -5,6 +5,9 @@
   --cream: #f4f0d8;
   --gold: #d9c67a;
   --ink: #eaf3d8;
+  /* 功能性文字用的系統黑體（零載入、中英皆佳）*/
+  --ui-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang TC",
+    "Noto Sans TC", "Microsoft JhengHei", "Helvetica Neue", Arial, sans-serif;
 }
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -562,16 +565,18 @@ body {
 .cz-options { display: flex; flex-direction: column; gap: 1.6rem; }
 .cz-group { display: flex; flex-direction: column; gap: 0.7rem; }
 .cz-label {
-  font-size: 0.95rem;
-  color: var(--gold);
-  letter-spacing: 0.15em;
-  font-weight: 700;
+  font-family: var(--ui-sans);
+  font-size: 0.72rem;
+  color: rgba(217, 198, 122, 0.65);   /* 低調灰金 */
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  font-weight: 600;
 }
 .cz-btns { display: flex; flex-wrap: wrap; gap: 0.7rem; }
 .cz-btn {
-  font-family: "Noto Serif TC", serif;
-  font-size: 1rem;
-  font-weight: 700;
+  font-family: var(--ui-sans);
+  font-size: 0.95rem;
+  font-weight: 600;
   color: var(--cream);
   padding: 0.6rem 1.4rem;
   border-radius: 999px;
@@ -585,7 +590,7 @@ body {
   background: linear-gradient(135deg, var(--green-bright), #7f9a2e);
   color: #17240b;
   border-color: transparent;
-  box-shadow: 0 6px 18px rgba(187, 199, 82, 0.35);
+  box-shadow: 0 3px 11px rgba(187, 199, 82, 0.25);   /* 降低光暈 */
 }
 
 .cz-result {
@@ -596,8 +601,8 @@ body {
   padding-top: 1.4rem;
   border-top: 1px solid rgba(217, 198, 122, 0.2);
 }
-.cz-result-label { color: var(--cream); opacity: 0.7; font-size: 0.9rem; letter-spacing: 0.1em; }
-.cz-summary { color: #fff; font-size: 1.2rem; letter-spacing: 0.05em; }
+.cz-result-label { font-family: var(--ui-sans); color: var(--cream); opacity: 0.6; font-size: 0.72rem; letter-spacing: 0.18em; text-transform: uppercase; }
+.cz-summary { font-family: var(--ui-sans); color: #fff; font-size: 1.15rem; font-weight: 600; letter-spacing: 0.02em; }
 
 .cz-cta {
   display: inline-block;
@@ -623,6 +628,7 @@ body {
   .cz-options { align-items: center; text-align: center; }
   .cz-group { align-items: center; }
   .cz-btns { justify-content: center; }
+  .cz-btn { font-size: 0.82rem; padding: 0.5rem 1rem; }   /* 手機按鈕縮小 */
   .cz-result { justify-content: center; flex-wrap: wrap; gap: 0.4rem; }
   .cz-cta { align-self: center; }
 }
@@ -787,7 +793,7 @@ html[lang="en"] .badge-big { font-size: 1.5rem; }
 
 /* ---- 英文版：段落標題用 Playfair ---- */
 html[lang="en"] .story-title,
-html[lang="en"] .cz-title { font-family: "Playfair Display", "Noto Serif TC", serif; }
+html[lang="en"] .cz-title { font-family: "Fraunces", "Noto Serif TC", serif; }
 
 @media (max-width: 860px) {
   .lang-toggle { top: 14px; right: 14px; padding: 0.35rem 0.8rem; font-size: 0.82rem; }
