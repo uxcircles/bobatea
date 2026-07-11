@@ -412,7 +412,7 @@ body {
     position: absolute;
     left: 100%; right: auto; bottom: auto;
     top: 24%;
-    margin-left: -3.5em;      /* 與中文的水平間距 */
+    margin-left: -0.5em;      /* 與中文的水平間距（負值越小越往右）*/
     text-align: left;
     transform: rotate(-8deg);
     font-size: clamp(1.4rem, 6vw, 2rem);
